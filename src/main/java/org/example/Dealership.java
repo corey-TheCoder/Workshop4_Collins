@@ -20,10 +20,6 @@ public class Dealership {//Restaurant class
         this.address = address;
         this.phoneNum = phoneNum;
         this.inventory = new ArrayList<>();
-
-
-        //creating object
-        inventory = new ArrayList<>();
     }
 
 
@@ -58,8 +54,8 @@ public class Dealership {//Restaurant class
         return inventory;
     }
 
-    public void setInventory(ArrayList<Vehicle> inventory) {
-        this.inventory = inventory;
+    public void setInventory(List<Vehicle> inventory) {
+        this.inventory = new ArrayList<>(inventory);
     }
 
     //add vehicle
