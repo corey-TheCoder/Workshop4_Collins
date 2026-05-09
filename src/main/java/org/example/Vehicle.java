@@ -1,6 +1,6 @@
 package org.example;
 
-public class Vehicle {
+public class Vehicle {//menu class
     //properties, encapsulation
     private int vin;
     private int year;
