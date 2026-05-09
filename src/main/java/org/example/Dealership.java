@@ -10,16 +10,16 @@ public class Dealership {//Restaurant class
     //compared to previous projects, this declaration allows each DEALERSHIP do have its own inventory
     //one dealership could have 500, while the others 12
     //no data sharing
-    private List<Vehicle> inventory;
+    private ArrayList<Vehicle> inventory;
 
     //constructor
 
 
-    public Dealership(String name, String address, String phoneNum, List<Vehicle> inventory) {
+    public Dealership(String name, String address, String phoneNum) {
         this.name = name;
         this.address = address;
         this.phoneNum = phoneNum;
-        this.inventory = inventory;
+        this.inventory = new ArrayList<>();
 
 
         //creating object
@@ -53,11 +53,18 @@ public class Dealership {//Restaurant class
         this.phoneNum = phoneNum;
     }
 
+    //this gets vehicles doesnt it??
     public List<Vehicle> getInventory() {
         return inventory;
     }
 
-    public void setInventory(List<Vehicle> inventory) {
+    public void setInventory(ArrayList<Vehicle> inventory) {
         this.inventory = inventory;
     }
+
+    //add vehicle
+    public void addVehicle(Vehicle vehicle){
+        inventory.add(vehicle);
+    }
+
 }
