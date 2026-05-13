@@ -1,8 +1,6 @@
 package org.example;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 
 public class DealershipFileManager {//load Dealership && Vehicle from CSV
     public Dealership getDealership(){
@@ -48,6 +46,37 @@ public class DealershipFileManager {//load Dealership && Vehicle from CSV
             System.out.println("Something went wrong with the data in the file. ");
         }
         return dealership;
+    }
+    public void saveDealership(Dealership dealership){
+        try (BufferedWriter writer = new BufferedWriter( new FileWriter("src/main/resources/Vehicles.csv"))){
+            //creating header
+            String header = String.format("%s | %s | %s\n",
+                    dealership.getName(), dealership.getAddress(), dealership.getPhoneNum());
+            //writing header
+            writer.write(header);
+
+            for (Vehicle v : dealership.getInventory()){
+                //create vehicle
+                String vehicleLine = String.format("%d | %d | %s | %s | %s | %s | " +
+                        "%d | %.2f\n",
+                        v.getVin(),
+                        v.getYear(),
+                        v.getMake(),
+                        v.getModel(),
+                        v.getVehicleType(),
+                        v.getColor(),
+                        v.getOdometer(),
+                        v.getPrice());
+
+                //write into file
+                writer.write(vehicleLine);
+            }
+
+        } catch (IOException e){
+            System.out.println("Error saving to file.");
+        }
+
+
     }
 
 }

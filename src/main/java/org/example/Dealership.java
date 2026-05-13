@@ -63,4 +63,10 @@ public class Dealership {//Restaurant class
         inventory.add(vehicle);
     }
 
+    //remove vehicle
+    public void removeVehicle(Vehicle vehicle){
+        inventory.remove(vehicle);
+    }
+
+
 }
