@@ -47,6 +47,7 @@ public class DealershipFileManager {//load Dealership && Vehicle from CSV
         }
         return dealership;
     }
+    //save method
     public void saveDealership(Dealership dealership){
         try (BufferedWriter writer = new BufferedWriter( new FileWriter("src/main/resources/Vehicles.csv"))){
             //creating header
