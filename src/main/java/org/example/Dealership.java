@@ -67,6 +67,7 @@ public class Dealership {//Restaurant class
     public void removeVehicle(Vehicle vehicle){
         inventory.remove(vehicle);
     }
+    //price
     public List<Vehicle> getVehiclesByPrice(double min, double max) {
         List<Vehicle> results = new ArrayList<>();
         for (Vehicle v: inventory){
@@ -77,11 +78,53 @@ public class Dealership {//Restaurant class
         return results;
     }
 
+    //make or model
     public List<Vehicle> getVehiclesByMakeModel(String make, String model) {
         List<Vehicle> results = new ArrayList<>();
         for (Vehicle v : inventory) {
             if (v.getMake().equalsIgnoreCase(make) && v.getModel().equalsIgnoreCase(model))
                 results.add(v);
+        }
+        return results;
+    }
+
+    //year
+    public List<Vehicle> getVehiclesByYear(int min, int max) {
+        List<Vehicle> results = new ArrayList<>();
+        for (Vehicle v: inventory){
+            if (v.getYear() >= min && v.getYear() <= max){
+                results.add(v);
+            }
+        }
+        return results;
+    }
+    //color
+    public List<Vehicle> getVehiclesByColor(String color) {
+        List<Vehicle> results = new ArrayList<>();
+        for (Vehicle v : inventory) {
+            if (v.getColor().equalsIgnoreCase(color)) {
+                results.add(v);
+            }
+        }
+        return results;
+    }
+    //mileage
+    public List<Vehicle> getVehiclesByMileage(int min, int max) {
+        List<Vehicle> results = new ArrayList<>();
+        for (Vehicle v: inventory){
+            if (v.getOdometer() >= min && v.getOdometer() <= max){
+                results.add(v);
+            }
+        }
+        return results;
+    }
+    //type
+    public List<Vehicle> getVehiclesByType(String vehicleType) {
+        List<Vehicle> results = new ArrayList<>();
+        for (Vehicle v: inventory){
+            if (v.getVehicleType().equalsIgnoreCase(vehicleType)) {
+                results.add(v);
+            }
         }
         return results;
     }
