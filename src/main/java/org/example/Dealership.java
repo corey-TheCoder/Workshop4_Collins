@@ -67,6 +67,25 @@ public class Dealership {//Restaurant class
     public void removeVehicle(Vehicle vehicle){
         inventory.remove(vehicle);
     }
+    public List<Vehicle> getVehiclesByPrice(double min, double max) {
+        List<Vehicle> results = new ArrayList<>();
+        for (Vehicle v: inventory){
+            if (v.getPrice() >= min && v.getPrice() <= max){
+                results.add(v);
+            }
+        }
+        return results;
+    }
+
+    public List<Vehicle> getVehiclesByMakeModel(String make, String model) {
+        List<Vehicle> results = new ArrayList<>();
+        for (Vehicle v : inventory) {
+            if (v.getMake().equalsIgnoreCase(make) && v.getModel().equalsIgnoreCase(model))
+                results.add(v);
+        }
+        return results;
+    }
+
 
 
 }
