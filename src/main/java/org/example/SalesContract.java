@@ -15,6 +15,7 @@ public class SalesContract extends Contract {
 
     @Override
     public double getTotalPrice() {
+        //processing fee based on price of vehicle
         BigDecimal vehiclePrice = BigDecimal.valueOf(getVehicleSold().getPrice());
         BigDecimal processFee;
         if (getVehicleSold().getPrice() < 10000) {
@@ -31,7 +32,25 @@ public class SalesContract extends Contract {
 
     @Override
     public double getMonthlyPayment() {
-        return 0;
+        if (!finance){
+            return 0.0;
+        }
+        //calculating interest based on price
+        double price = getTotalPrice();
+        double interestRate;
+        int months;
+        if(price >= 10000){
+            interestRate = 0.0425;
+            months = 48;
+        }else {
+            interestRate = 0.525;
+            months = 24;
+        }
+        BigDecimal secondPrice = new BigDecimal(Double.toString(price));
+        BigDecimal monthlyRate = new BigDecimal(Double.toString(interestRate/12));
+        double monthlyPayment = price * ((interestRate /  12) / (1 - Math.pow(1 + (interestRate / 12), -months)));
+
+        return new BigDecimal(monthlyPayment).setScale(2, RoundingMode.HALF_UP).doubleValue();
     }
 }
 
