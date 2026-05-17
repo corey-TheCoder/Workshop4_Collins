@@ -1,5 +1,12 @@
 package org.example;
 
+import contract.Contract;
+import contract.ContractFileManager;
+import contract.LeaseContract;
+import contract.SalesContract;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Scanner;
 
@@ -46,6 +53,7 @@ public class UserInterface {
             System.out.println("7.  List all vehicles: ");
             System.out.println("8. Add a vehicle: ");
             System.out.println("9. Remove a vehicle: ");
+            System.out.println("10. Sale or lease");
             System.out.println("99. Exit!");
 
             //userinput
@@ -90,6 +98,8 @@ public class UserInterface {
                 case "9":
                     processRemoveVehicleRequest();
                     break;
+                case "10":
+                    contractRequest();
 
                 case "99":
                     //stop loop
@@ -245,6 +255,55 @@ public class UserInterface {
             //price
             System.out.println("Price: " + v.getPrice());
             System.out.println("==================================================================");
+        }
+    }
+    public void contractRequest() {
+        System.out.println("Enter VIN of vehicle you would like to Sale/Lease");
+        int vin = scanner.nextInt();
+        scanner.nextLine();
+
+        Vehicle vehicle = dealership.getVehicleByVin(vin);
+        for (Vehicle v : dealership.getInventory()) {
+            if (v.getVin() == vin) {
+                vehicle = v;
+                break;
+            }
+        }
+        if (vehicle == null) {
+            System.out.println("Vehicle not found!");
+            return;
+        }
+        System.out.println("Enter Customer Name: ");
+        String customerName = scanner.nextLine();
+
+        System.out.println("Enter Customer Email: ");
+        String customerEmail = scanner.nextLine();
+
+        System.out.println("SALE or LEASE");
+        String type = scanner.nextLine();
+
+        Contract contract = null;
+        String today = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+
+        if (type.equalsIgnoreCase("SALE")) {
+            System.out.print("Finance? ");
+            boolean finance = scanner.nextLine().equalsIgnoreCase("yes");
+
+            // THIS LINE MUST BE INSIDE THESE BRACES
+            contract = new SalesContract(today, customerName, customerEmail, vehicle, finance);
+
+        } else if ((type.equalsIgnoreCase("LEASE"))) {
+            if (2026 - vehicle.getYear() > 3) {
+                System.out.println("Too old to lease!");
+                return;
+            }
+            contract = new LeaseContract(today, customerName, customerEmail, vehicle);
+        }
+        if (contract != null) {
+            ContractFileManager cfm = new ContractFileManager();
+            cfm.saveContract(contract);
+
+            dealership.removeVehicle(vehicle);
         }
     }
 }

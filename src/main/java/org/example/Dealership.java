@@ -13,15 +13,12 @@ public class Dealership {//Restaurant class
     private ArrayList<Vehicle> inventory;
 
     //constructor
-
-
     public Dealership(String name, String address, String phoneNum) {
         this.name = name;
         this.address = address;
         this.phoneNum = phoneNum;
         this.inventory = new ArrayList<>();
     }
-
 
     //getters & setters
 
@@ -128,7 +125,13 @@ public class Dealership {//Restaurant class
         }
         return results;
     }
-
-
+    public Vehicle getVehicleByVin(int vin) {
+        for (Vehicle v : inventory) {
+            if (v.getVin() == vin) {
+                return v;
+            }
+        }
+        return null;
+    }
 
 }

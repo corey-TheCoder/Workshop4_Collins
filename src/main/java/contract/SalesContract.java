@@ -10,9 +10,9 @@ public class SalesContract extends Contract {
     private BigDecimal recordingFee = new BigDecimal("100.00");
     private boolean finance;
 
-    public SalesContract(String date, String customerName, String customerEmail, Vehicle vehicleSold) {
+    public SalesContract(String date, String customerName, String customerEmail, Vehicle vehicleSold, boolean finance) {
         super(date, customerName, customerEmail, vehicleSold);
-        this.finance = finance;
+        this.finance = this.finance;
     }
 
     @Override
