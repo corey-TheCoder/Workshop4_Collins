@@ -1,6 +1,6 @@
-package org.example;
+package contract;
 
-import java.math.BigDecimal;
+import org.example.Vehicle;
 
 public abstract class Contract {
     private String date;

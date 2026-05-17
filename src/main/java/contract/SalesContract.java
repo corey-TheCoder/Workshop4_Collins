@@ -1,4 +1,6 @@
-package org.example;
+package contract;
+
+import org.example.Vehicle;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
